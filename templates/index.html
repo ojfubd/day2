@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ja">
+ <head>
+   <meta charset="UTF-8">
+   <title></title>
+   <link rel="stylesheet" type="text/css" href="static/design.css">
+   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+ </head>
+ <body>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="/">Value Searcher</a>
+          <form class="d-flex" action="/howto" method="GET">
+          <a type="button" class="btn btn-primary" href="/howto">使い方</a>
+          </form>
+          <form class="d-flex" action="/login" method="GET">
+            <a type="button" class="btn btn-primary" href="/login">ログイン</a>
+          </form>
+          <form class="d-flex" method="POST">
+            <input class="form-control me-2" type="search" placeholder="ソニー,2143" aria-label="Search" name=num >
+            <button class="btn btn-outline-success" type="submit">Search</button>
+            
+          </form>
+        </div>
+      </nav>  
+  <!--全ての入力欄を閲覧者から編集できないようにしたいときはinputの中にdisabled属性を入れること-->
+  
+    
+      
+       <ul id="1" class="inner-table">損益計算書</ul>
+       
+
+    <form id="form" action="/roughprofit" method="POST">
+          <label for="">売上高{{originaldata1}}</label>
+          <input id="number2" class="main" type="number" name="sales" placeholder="千万円">
+          <label for="">売上総利益（粗利益）{{originaldata2}}<span id="span3"></span></label>
+          <input id="number3" class="main" type="number" name="roughprofit" placeholder="千万円">
+          <input type="submit" value="計算"onclick="onclickBtn3()" />
+          <ul>粗利益率(小数点第一位％表示)</ul>{{ result }}
+          
+        </form>
+
+
+      <form action="/SAG" method="POST">
+          <label for="">売上総利益（粗利益）{{o1}}</label>
+          <input class="main" id="one" type="number" name='roughprofit' placeholder="千万円">
+          <label for="">販売費及び一般管理費（SAG）{{o2}}</label>
+          <input  class="main" type="number" name='SAG' placeholder="千万円">
+          <input type="submit" value="計算">
+          <ul>粗利益に対するSAGの割合（SAG÷粗利益）</ul>{{ result1 }}
+        </form>
+          <form action="/research" method="POST">
+          <label for="">研究開発費{{o3}}</label>
+          <input class="main" type="number" name='research' placeholder="千万円">
+          <label for="">売上総利益（粗利益）{{o4}}</label>
+          <input class="main" type="number" name='roughprofit' placeholder="千万円">
+          <input type="submit" value="計算">
+          <ul>粗利益に対する研究開発費の割合</ul>{{ result2 }}
+         </form>
+          <form action="/DPC" method="POST">
+          <label for="">減価償却費{{o5}}</label>
+          <input  class="main" type="number" name='DPC' placeholder="千万円">
+          <label for="">売上総利益（粗利益）{{o6}}</label>
+          <input class="main" type="number" name='roughprofit' placeholder="千万円">
+          <input type="submit" value="計算">
+          <ul>粗利に対する減価償却費の割合</ul>{{ result3 }}
+         </form>
+
+          <form action="/pay_salep" method="POST">
+          <label for="">営業利益{{o7}}</label>
+          <input class="main" type="number" name='saleprofit' placeholder="千万円">
+          <label for="">支払利息{{o8}}</label>
+          <input  class="main" type="number" name='payinterest' placeholder="千万円">
+          <input type="submit" value="計算">
+          <ul>営業利益に対する支払利息の割合</ul>{{ result4 }}
+          </form>
+          <form action="/Netincome_sales" method="POST">
+          <label for="">売上高{{o9}}</label>
+          <input class="main" type="number" name='sales' placeholder="千万円">
+          <label for="">純利益{{o10}}</label>
+          <input  class="main" type="number" name='Netincome' placeholder="千万円">
+          <input type="submit" value="計算">
+        <ul>売上高に対する純利益の割合</ul>{{ result5 }}
+      </form>
+
+
+      <ul>貸借対照表</ul>
+      
+        
+
+      <form action="/Accounts_sales" method="POST">
+        <label for="">売掛金{{o11}}</label>
+        <input class="main" type="number" name='AccountsReceivable' placeholder="千万円">
+        <label for="">売上高{{o12}}</label>
+        <input class="main" type="number" name='sales' placeholder="千万円">
+        <input type="submit" value="計算">
+        <ul>売り上げに対する売掛金の割合</ul>{{ result6 }}
+      </form>
+
+        <form action="/Net_income_Asset" method="POST">
+        <label for="">純利益{{o13}}</label>
+        <input class="main" type="number" name='Netincome' placeholder="千万円">
+        <label for="">純資産{{o14}}</label>
+        <input class="main" type="number" name='NetAssets' placeholder="千万円">
+        <input type="submit" value="計算">
+        <ul>株主資本利益率（純利益÷純資産）</ul>{{ result7 }}
+        </form>
+
+      <ul>キャッシュフロー計算書</ul>
+
+      <form action="/Netincome_CapitalE" method="POST">
+      <label for="">資本的支出{{o15}}</label>
+        <input class="main" type="number" name='CapitalExpenditure' placeholder="千万円">
+        <label for="">純利益{{o16}}</label>
+        <input class="main" type="number" name='Netincome' placeholder="千万円">
+        <input type="submit" value="計算">
+     <ul>資本的支出に対する純利益の割合（資本的支出÷純利益）</ul>{{ result8 }}
+  </form>
+  <script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
+ </body>
+      
+ 
+</html>
