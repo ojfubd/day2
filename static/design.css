@@ -1,0 +1,8 @@
+.nav{
+    position: relative;
+}
+.main{
+    display:flex;
+    flex-flow: column;
+}
+   
